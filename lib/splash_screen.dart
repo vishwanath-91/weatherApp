@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 
-import 'getApiData/weatherApi.dart';
+import 'getApiData/weatherapi.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -15,48 +16,106 @@ class _SplashscreenState extends State<Splashscreen> {
     GetApiData instanceData = GetApiData();
     await instanceData.getData();
     //*******//
-    String weatherData = instanceData.weather;
-    String weatherDescData = instanceData.weatherDesc;
-    String weatherIconData = instanceData.weatherIcon;
+    late String weatherData = instanceData.weather;
+    late String weatherDescData = instanceData.weatherDesc;
+    late String weatherIconData = instanceData.weatherIcon;
     //*******//
-    String weatherTempData = instanceData.weatherTemp;
-    String weatherTempMinData = instanceData.weatherTempMin;
-    String weatherTempMaxData = instanceData.weatherTempMax;
-    String weatherHumidityData = instanceData.weatherHumidity;
-    String weatherPressureData = instanceData.weatherPressure;
+    late String weatherTempData = instanceData.weatherTemp;
+    late String weatherTempMinData = instanceData.weatherTempMin;
+    late String weatherTempMaxData = instanceData.weatherTempMax;
+    late String weatherHumidityData = instanceData.weatherHumidity;
+    late String weatherPressureData = instanceData.weatherPressure;
     //*******//
-    String weatherWindSpeedData = instanceData.weatherWindSpeed;
+    late String weatherWindSpeedData = instanceData.weatherWindSpeed;
     //*******//
-    String weatherRainData = instanceData.weatherRain;
+    late String weatherRainData = instanceData.weatherRain;
     //*******//
-    GoRouter.of(context).pushReplacementNamed('Home', pathParameters: {
-      //*******//
-      'weatherdata': weatherData,
-      'weatherdescdata': weatherDescData,
-      'weathericondata': weatherIconData,
-      //*******//
-      'weathertempdata': weatherTempData,
-      'weathertempmindata': weatherTempMinData,
-      'weathertempmaxdata': weatherTempMaxData,
-      'weatherhumiditydata': weatherHumidityData,
-      'weatherpressuredata': weatherPressureData,
-      //*******//
-      'weatherwindspeeddata': weatherWindSpeedData,
-      //*******//
-      'weatherraindata': weatherRainData,
+
+    Future.delayed(const Duration(seconds: 5), () {
+      if (context.mounted) {
+        GoRouter.of(context).pushReplacementNamed('Home', pathParameters: {
+          //*******//
+          'weatherdata': weatherData,
+          'weatherdescdata': weatherDescData,
+          'weathericondata': weatherIconData,
+          //*******//
+          'weathertempdata': weatherTempData,
+          'weathertempmindata': weatherTempMinData,
+          'weathertempmaxdata': weatherTempMaxData,
+          'weatherhumiditydata': weatherHumidityData,
+          'weatherpressuredata': weatherPressureData,
+          //*******//
+          'weatherwindspeeddata': weatherWindSpeedData,
+          //*******//
+          'weatherraindata': weatherRainData,
+        });
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
-    // apiDataLoad();
+    apiDataLoad();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(children: [Text("i am loading screen")]),
+    return Scaffold(
+      backgroundColor: Colors.cyan.shade900,
+      body: const SafeArea(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image(
+                        image: AssetImage(
+                            'lib/assets/images/weather-icon-png-8.png')),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SpinKitFadingCircle(
+                    color: Colors.yellow,
+                    size: 50.0,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Weather App",
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Created By Vishwanath",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              )
+            ]),
+      ),
     );
   }
 }
