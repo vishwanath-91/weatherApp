@@ -31,7 +31,7 @@ class _SplashscreenState extends State<Splashscreen> {
     late String weatherRainData = instanceData.weatherRain;
     //*******//
 
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (context.mounted) {
         GoRouter.of(context).pushReplacementNamed('Home', pathParameters: {
           //*******//
@@ -69,52 +69,63 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan.shade900,
-      body: const SafeArea(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Image(
-                        image: AssetImage(
-                            'lib/assets/images/weather-icon-png-8.png')),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SpinKitFadingCircle(
-                    color: Colors.yellow,
-                    size: 50.0,
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Weather App",
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Created By Vishwanath",
-                    style: TextStyle(
-                      color: Colors.white,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                Colors.lightBlueAccent,
+                Colors.blue,
+                Colors.red,
+              ])),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Image(
+                          image: AssetImage(
+                              'lib/assets/images/weather-icon-png-8.png')),
                     ),
-                  )
-                ],
-              )
-            ]),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SpinKitFadingCircle(
+                      color: Colors.yellow,
+                      size: 50.0,
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Weather App",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Created By Vishwanath",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                )
+              ]),
+        ),
       ),
     );
   }

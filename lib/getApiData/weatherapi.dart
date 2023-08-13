@@ -24,7 +24,7 @@ class GetApiData {
   Future<void> getData() async {
     try {
       dynamic url = Uri.parse(
-          "https://api.openweathermap.org/data/2.5/weather?q=chausa&appid=c7c1ac35067c9968cc494baad5928de2");
+          "https://api.openweathermap.org/data/2.5/weather?q=buxar&appid=c7c1ac35067c9968cc494baad5928de2");
       Response response = await get(url);
 
       Map data = jsonDecode(response.body);
